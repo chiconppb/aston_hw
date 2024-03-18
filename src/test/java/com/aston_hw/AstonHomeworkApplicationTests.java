@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @SpringBootTest
@@ -13,29 +14,26 @@ class AstonHomeworkApplicationTests {
     private static final CustomArrayList<Integer> ARRAY = new CustomArrayList<>();
     private static final CustomArrayList<Integer> COMPARE_LIST = new CustomArrayList<>();
 
-
-    private static final Integer a = 10;
-    private static final Integer b = 20;
-//    private static final Integer c = 30;
-//    private static final Integer d = 40;
-//    private static final CustomArrayList<Integer> list1 = new CustomArrayList<>();
-//    private static final CustomArrayList<Integer> list2 = new CustomArrayList<>();
+    private static final int a = 15;
+    private static final int b = 27;
+    private static final int c = 31;
+    private static final int d = 49;
 
 
     @BeforeEach
     public void init() {
         ARRAY.clear();
         COMPARE_LIST.clear();
-        ARRAY.add(a);
         ARRAY.add(b);
+        ARRAY.add(a);
     }
 
     @Test
     public void addElement() {
-        COMPARE_LIST.add(a);
         COMPARE_LIST.add(b);
-        Assertions.assertEquals(COMPARE_LIST.get(0), ARRAY.get(0));
+        COMPARE_LIST.add(a);
         Assertions.assertEquals(COMPARE_LIST.get(1), ARRAY.get(1));
+        Assertions.assertEquals(COMPARE_LIST.get(0), ARRAY.get(0));
     }
 
     @Test
@@ -56,12 +54,12 @@ class AstonHomeworkApplicationTests {
     public void addAll() {
         CustomArrayList<String> list = new CustomArrayList<>();
         List<String> newList = new ArrayList<>();
-        newList.add(a.toString());
-        newList.add(b.toString());
+        newList.add(((Integer) a).toString());
+        newList.add(((Integer) b).toString());
         list.addAll(newList);
         Assertions.assertEquals(2, list.size());
-        Assertions.assertEquals(a.toString(), list.get(0));
-        Assertions.assertEquals(b.toString(), list.get(1));
+        Assertions.assertEquals(((Integer) a).toString(), list.get(0));
+        Assertions.assertEquals(((Integer) b).toString(), list.get(1));
 
     }
 
@@ -80,11 +78,25 @@ class AstonHomeworkApplicationTests {
 
     @Test
     public void remove() {
+        ARRAY.add(c);
+        ARRAY.add(d);
+        ARRAY.remove(1);
+        Assertions.assertEquals(3, ARRAY.size());
 
     }
 
     @Test
     public void sort() {
+        ARRAY.add(d);
+        ARRAY.add(c);
+        for(int i=0; i<ARRAY.size(); i++){
 
+            System.out.println(ARRAY.get(i));
+        }
+        ARRAY.sort(Comparator.naturalOrder());
+        Assertions.assertEquals(15, ARRAY.get(0));
+        Assertions.assertEquals(27, ARRAY.get(1));
+        Assertions.assertEquals(31, ARRAY.get(2));
+        Assertions.assertEquals(49, ARRAY.get(3));
     }
 }

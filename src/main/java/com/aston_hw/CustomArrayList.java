@@ -2,7 +2,7 @@ package com.aston_hw;
 
 import java.util.*;
 
-public class CustomArrayList<E>{
+public class CustomArrayList<E> {
     private static final int INITIAL_CAPACITY = 10;
 
     private static final Object[] EMPTY_ARRAY = {};
@@ -31,12 +31,16 @@ public class CustomArrayList<E>{
         if (size() == arrayList.length) {
             extendArray(INITIAL_CAPACITY);
         }
-        System.arraycopy(arrayList, index, arrayList, index + 1, arrayList.length - (index+1));
+        System.arraycopy(arrayList, index, arrayList, index + 1, arrayList.length - (index + 1));
         arrayList[index] = element;
         size++;
     }
 
     public boolean add(E element) {
+        if (size == 0) {
+            extendArray(INITIAL_CAPACITY);
+            arrayList[size] = element;
+        }
         if (size < arrayList.length) {
             arrayList[size] = element;
             size++;
@@ -76,7 +80,6 @@ public class CustomArrayList<E>{
         isValidRange(index);
         return (E) arrayList[index];
     }
-
 
 
     public boolean isEmpty() {
